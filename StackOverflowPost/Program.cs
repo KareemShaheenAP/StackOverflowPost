@@ -17,6 +17,14 @@ namespace StackOverflowPost
         public DateTime CreatedAt { get; private set; }
         public Post(string title, string description)
         {
+            if (string.IsNullOrEmpty(title))
+            {
+                throw new ArgumentNullException("Title cannot be null.");
+            }
+            if (string.IsNullOrEmpty(description))
+            {
+                throw new ArgumentNullException("description cannot be null.");
+            }
             Title = title;
             Description = description;
             CreatedAt = DateTime.Now;
@@ -43,8 +51,11 @@ namespace StackOverflowPost
     {
         static void Main(string[] args)
         {
-
-            Post post = new Post("OOP discussion", "for beginners");
+            Console.WriteLine("Enter Title");
+            var title = Console.ReadLine();
+            Console.WriteLine("Enter description");
+            var desc = Console.ReadLine();
+            Post post = new Post(title, desc);
             do
             {
                 Console.WriteLine($"Title: {post.Title}");
